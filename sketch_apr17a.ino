@@ -7,6 +7,7 @@
 char customKey;
 LiquidCrystal lcd(30, 32, 22, 24, 26, 28);
 long randnum=0;
+// int Lock = 32; // Connecting the relay to the 5th pin
 const byte ROWS = 4; //four rows
 const byte COLS = 3; //four columns
 //define the cymbols on the buttons of the keypads
@@ -27,7 +28,8 @@ int bp=1;
 void setup(){
   randomSeed(12);
   lcd.begin(16, 2);
-
+  // pinMode(Lock, OUTPUT);
+  // digitalWrite(Lock, HIGH);
   
     
     
@@ -89,6 +91,7 @@ void verifyotp(String temp)
             lcd.clear();
             lcd.print("Lock Opened");
             Serial.println("Same");
+            // digitalWrite(Lock, LOW);
             randstr="";
           }
         }                
