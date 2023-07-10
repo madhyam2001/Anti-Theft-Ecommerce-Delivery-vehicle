@@ -29,7 +29,7 @@ const int echoPin = 36;
 const int buzzer = 2;
 // const int ledPin = 13;
 long duration;
-int distance;
+int distance=24;
 int safetyDistance;
 
 
@@ -75,6 +75,7 @@ int oldbp=256;
 void setup(){
   Serial.begin(9600);
   myservo.attach(14);
+  myservo.write(0);
   lcd.begin(16, 2);
 
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
@@ -240,15 +241,19 @@ void verifyotp(String temp)
           lcd.print(customKey);
       }  
           randstr+=customKey;
+          
           if ((randstr)==(temp))
           {
             lcd.clear();
             lcd.print("Lock Opened");
             Serial.println("Same");
-            for (pos = 0; pos <= 90; pos += 1) { 
-              myservo.write(pos);
-              delay(15);
-            }
+            // for (pos = 0; pos <= 90; pos += 1) { 
+            //   myservo.write(pos);
+            //   // delay(15);
+            // }
+            myservo.write(90);
+            delay(60000);
+            myservo.write(0);
             // digitalWrite(Lock, LOW);
             randstr="";
           }
